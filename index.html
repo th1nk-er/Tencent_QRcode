@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        .container {
+            margin-top: 10%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img id="qrcode" alt="qrcode" src=""/>
+    <span id="status"></span>
+    <div class="btn-group">
+        <button onclick="getQrCode()">获取</button>
+        <button onclick="checkStatus()">状态</button>
+    </div>
+</div>
+<script>
+    function getQrCode() {
+        const qr = document.getElementById("qrcode")
+        axios.get("http://localhost:8080/qrcode").then(res => qr.src = res.data)
+    }
+
+    function checkStatus() {
+        axios.get("http://localhost:8080/status").then(res => document.getElementById("status").innerText = res.data)
+    }
+</script>
+</body>
+</html>
